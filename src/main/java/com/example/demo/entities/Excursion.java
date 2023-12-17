@@ -10,4 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Excursion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 }
