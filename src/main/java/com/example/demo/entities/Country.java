@@ -1,15 +1,40 @@
-package src.main.java.com.example.demo.entities;
+package com.example.demo.entities;
 
 // import javax.persistence.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "countries")
 @Getter
 @Setter
+@ToString
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "country_id")
+    private Long id;
+
+    @Column(name = "country")
+    private String country_name;
+
+    @Column(name = "create_date")
+    @CreationTimestamp
+    private Date create_date;
+
+    @Column(name = "last_update")
+    @UpdateTimestamp
+    private Date last_update;
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "country")
+    private Set<Division> divisions;
+
 }
