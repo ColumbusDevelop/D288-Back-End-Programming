@@ -20,7 +20,7 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="customer_id", nullable = false)
+    @Column(name="customer_id")
     private Long id;
 
     @Column(name = "customer_first_name", nullable = false)
