@@ -54,4 +54,7 @@ public class Cart {
 
     public void setCartitem(Set<CartItem> cartItems) {
     }
+
+    public void add(CartItem item) {
+    }
 }
