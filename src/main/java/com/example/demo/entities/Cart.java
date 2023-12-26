@@ -2,9 +2,7 @@ package com.example.demo.entities;
 
 // import javax.persistence.*;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,6 +16,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,9 +52,10 @@ public class Cart {
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "cart")
     private Set<CartItem> cartItems = new HashSet<>();
 
-    public void setCartitem(Set<CartItem> cartItems) {
-    }
-
     public void add(CartItem item) {
+        if (item != null) {
+            cartItems.add(item);
+            item.setCart(this);
+        }
     }
 }

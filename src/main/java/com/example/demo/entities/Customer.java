@@ -2,9 +2,7 @@ package com.example.demo.entities;
 
 // import javax.persistence.*;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

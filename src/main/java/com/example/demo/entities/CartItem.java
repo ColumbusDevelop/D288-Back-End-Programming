@@ -2,7 +2,9 @@ package com.example.demo.entities;
 
 // import javax.persistence.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Table(name = "cart_items")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,10 @@ public class CartItem {
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartItems")
+    @ManyToMany
+    @JoinTable(name="excursion_cartitem",
+            joinColumns=@JoinColumn(name="cart_item_id"),
+            inverseJoinColumns=@JoinColumn(name="excursion_id"))
     private Set<Excursion> excursions = new HashSet<>();
 
     @ManyToOne

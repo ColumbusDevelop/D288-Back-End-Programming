@@ -20,11 +20,9 @@ import static com.example.demo.entities.StatusType.*;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private CustomerRepository customerRepository;
     private CartRepository cartRepository;
 
-    public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository){
-        this.customerRepository = customerRepository;
+    public CheckoutServiceImpl(CartRepository cartRepository){
         this.cartRepository = cartRepository;
     }
 
@@ -46,10 +44,12 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         //assigns order items to cart
         cartItems.forEach(item -> cart.add(item));
-        cart.setCartitem(cartItems);
 
         //assigns enum
         cart.setStatus(ordered);
+
+        //associate cart to the customer
+        cart.setCustomer(purchase.getCustomer());
 
         //saves cart to repository
         cartRepository.save(cart);
